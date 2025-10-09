@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:foodrecipeapp/models/category.dart';
 import 'package:foodrecipeapp/models/meal.dart';
+import 'package:foodrecipeapp/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
   const MealsScreen({super.key, required this.meals, required this.category});
@@ -10,11 +12,11 @@ class MealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = Center(
-      child: Text(
-        "The Recipes for the selected category will be shown here!",
-        style: TextStyle(color: Colors.white),
-      ),
+    Widget content = ListView.builder(
+      itemCount: meals.length,
+      itemBuilder: (ctx, index) {
+        return MealItem(meal: meals[index]);
+      },
     );
 
     if (meals.isEmpty) {
