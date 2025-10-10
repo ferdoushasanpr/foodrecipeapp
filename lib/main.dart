@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:foodrecipeapp/categories.dart';
+import 'package:foodrecipeapp/foodrecipeapp.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.latoTextTheme(),
       ),
-      home: const Categories(),
+      home: const FoodRecipeApp(),
     );
   }
 }

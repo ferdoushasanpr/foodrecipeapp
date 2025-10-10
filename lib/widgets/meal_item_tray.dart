@@ -10,9 +10,9 @@ class MealItemTray extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Padding(padding: const EdgeInsets.all(8.0), child: icon),
+        Padding(padding: const EdgeInsets.all(6), child: icon),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6),
           child: Text(label, style: TextStyle(color: Colors.white)),
         ),
       ],

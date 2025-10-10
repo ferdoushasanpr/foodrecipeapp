@@ -4,14 +4,29 @@ import 'package:foodrecipeapp/models/meal.dart';
 import 'package:foodrecipeapp/widgets/meal_item_tray.dart';
 
 class MealScreen extends StatelessWidget {
-  const MealScreen({super.key, required this.meal});
+  const MealScreen({
+    super.key,
+    required this.meal,
+    required this.addToFavourite,
+  });
 
   final Meal meal;
+  final Function(Meal meal) addToFavourite;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("The Recipes")),
+      appBar: AppBar(
+        title: Text("The Recipes"),
+        actions: [
+          InkWell(
+            onTap: () {
+              addToFavourite(meal);
+            },
+            child: Icon(Icons.favorite),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

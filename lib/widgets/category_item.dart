@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:foodrecipeapp/models/category.dart';
+import 'package:foodrecipeapp/models/meal.dart';
 import 'package:foodrecipeapp/screens/meals_screen.dart';
 
 import 'package:foodrecipeapp/data/dummy_data.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, required this.category});
+  const CategoryItem({
+    super.key,
+    required this.category,
+    required this.addToFavourite,
+  });
 
   final Category category;
+  final Function(Meal meal) addToFavourite;
 
   void _selectedMeals(BuildContext context) {
     final meals = dummyMeals.where((meal) {
@@ -18,7 +24,11 @@ class CategoryItem extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) {
-          return MealsScreen(meals: meals, category: category);
+          return MealsScreen(
+            meals: meals,
+            category: category,
+            addToFavourite: addToFavourite,
+          );
         },
       ),
     );

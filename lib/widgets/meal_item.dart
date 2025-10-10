@@ -6,9 +6,10 @@ import 'package:foodrecipeapp/models/meal.dart';
 import 'package:foodrecipeapp/screens/meal_screen.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({super.key, required this.meal});
+  const MealItem({super.key, required this.meal, required this.addToFavourite});
 
   final Meal meal;
+  final Function(Meal meal) addToFavourite;
 
   String get complexityText {
     return meal.complexity.name[0].toUpperCase() +
@@ -24,7 +25,7 @@ class MealItem extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) {
-          return MealScreen(meal: meal);
+          return MealScreen(meal: meal, addToFavourite: addToFavourite);
         },
       ),
     );
