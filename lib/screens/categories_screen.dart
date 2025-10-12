@@ -5,8 +5,13 @@ import 'package:foodrecipeapp/widgets/category_item.dart';
 import 'package:foodrecipeapp/data/dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key, required this.addToFavourite});
+  const CategoriesScreen({
+    super.key,
+    required this.availableMeal,
+    required this.addToFavourite,
+  });
 
+  final List<Meal> availableMeal;
   final Function(Meal meal) addToFavourite;
 
   @override
@@ -20,7 +25,11 @@ class CategoriesScreen extends StatelessWidget {
       ),
       children: [
         for (var category in availableCategories)
-          CategoryItem(category: category, addToFavourite: addToFavourite),
+          CategoryItem(
+            category: category,
+            availableMeal: availableMeal,
+            addToFavourite: addToFavourite,
+          ),
       ],
     );
   }

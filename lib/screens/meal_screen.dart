@@ -19,11 +19,11 @@ class MealScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("The Recipes"),
         actions: [
-          InkWell(
-            onTap: () {
+          IconButton(
+            onPressed: () {
               addToFavourite(meal);
             },
-            child: Icon(Icons.favorite),
+            icon: Icon(Icons.favorite),
           ),
         ],
       ),

@@ -4,20 +4,20 @@ import 'package:foodrecipeapp/models/category.dart';
 import 'package:foodrecipeapp/models/meal.dart';
 import 'package:foodrecipeapp/screens/meals_screen.dart';
 
-import 'package:foodrecipeapp/data/dummy_data.dart';
-
 class CategoryItem extends StatelessWidget {
   const CategoryItem({
     super.key,
     required this.category,
+    required this.availableMeal,
     required this.addToFavourite,
   });
 
   final Category category;
+  final List<Meal> availableMeal;
   final Function(Meal meal) addToFavourite;
 
   void _selectedMeals(BuildContext context) {
-    final meals = dummyMeals.where((meal) {
+    final meals = availableMeal.where((meal) {
       return meal.categories.contains(category.id);
     }).toList();
 
