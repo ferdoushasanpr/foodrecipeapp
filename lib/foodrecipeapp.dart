@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodrecipeapp/data/dummy_data.dart';
 import 'package:foodrecipeapp/models/meal.dart';
+import 'package:foodrecipeapp/providers/meals_provider.dart';
 
 import 'package:foodrecipeapp/screens/categories_screen.dart';
 import 'package:foodrecipeapp/screens/favourite_screen.dart';
 import 'package:foodrecipeapp/widgets/drawer_items.dart';
 import 'package:foodrecipeapp/screens/filter_screen.dart';
 
-class FoodRecipeApp extends StatefulWidget {
+class FoodRecipeApp extends ConsumerStatefulWidget {
   const FoodRecipeApp({super.key});
 
   @override
-  State<FoodRecipeApp> createState() {
+  ConsumerState<FoodRecipeApp> createState() {
     return _FoodRecipeAppState();
   }
 }
 
-class _FoodRecipeAppState extends State<FoodRecipeApp> {
+class _FoodRecipeAppState extends ConsumerState<FoodRecipeApp> {
   int currentScreenIndex = 0;
   List<Meal> meals = [];
 
@@ -27,9 +29,8 @@ class _FoodRecipeAppState extends State<FoodRecipeApp> {
     Filter.vegan: false,
   };
 
-  // Corrected Filter Logic
   List<Meal> get _availableMeals {
-    return dummyMeals.where((meal) {
+    return ref.watch(mealProvider).where((meal) {
       if (_selectedMeals[Filter.glutenFree]! && !meal.isGlutenFree) {
         return false;
       }
@@ -49,9 +50,9 @@ class _FoodRecipeAppState extends State<FoodRecipeApp> {
   List<Widget> get screens => [
     CategoriesScreen(
       availableMeal: _availableMeals,
-      addToFavourite: addToFavourite,
+      toggleFavouriteMeal: toggleFavouriteMeal,
     ),
-    FavouriteScreen(meals: meals, addToFavourite: addToFavourite),
+    FavouriteScreen(meals: meals, toggleFavouriteMeal: toggleFavouriteMeal),
   ];
 
   void _selectScreen(int index) {
@@ -60,7 +61,7 @@ class _FoodRecipeAppState extends State<FoodRecipeApp> {
     });
   }
 
-  void addToFavourite(Meal meal) {
+  void toggleFavouriteMeal(Meal meal) {
     if (meals.contains(meal)) {
       setState(() {
         meals.remove(meal);

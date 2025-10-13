@@ -13,7 +13,6 @@ class Draweritems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("drawer");
     return Drawer(
       child: Column(
         children: [

@@ -9,12 +9,12 @@ class CategoryItem extends StatelessWidget {
     super.key,
     required this.category,
     required this.availableMeal,
-    required this.addToFavourite,
+    required this.toggleFavouriteMeal,
   });
 
   final Category category;
   final List<Meal> availableMeal;
-  final Function(Meal meal) addToFavourite;
+  final Function(Meal meal) toggleFavouriteMeal;
 
   void _selectedMeals(BuildContext context) {
     final meals = availableMeal.where((meal) {
@@ -27,7 +27,7 @@ class CategoryItem extends StatelessWidget {
           return MealsScreen(
             meals: meals,
             category: category,
-            addToFavourite: addToFavourite,
+            toggleFavouriteMeal: toggleFavouriteMeal,
           );
         },
       ),

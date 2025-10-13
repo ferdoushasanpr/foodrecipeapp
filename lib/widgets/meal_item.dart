@@ -6,10 +6,16 @@ import 'package:foodrecipeapp/models/meal.dart';
 import 'package:foodrecipeapp/screens/meal_screen.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({super.key, required this.meal, required this.addToFavourite});
+  const MealItem({
+    super.key,
+    required this.fromWhere,
+    required this.meal,
+    required this.toggleFavouriteMeal,
+  });
 
+  final String fromWhere;
   final Meal meal;
-  final Function(Meal meal) addToFavourite;
+  final Function(Meal meal) toggleFavouriteMeal;
 
   String get complexityText {
     return meal.complexity.name[0].toUpperCase() +
@@ -25,7 +31,11 @@ class MealItem extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) {
-          return MealScreen(meal: meal, addToFavourite: addToFavourite);
+          return MealScreen(
+            fromWhere: fromWhere,
+            meal: meal,
+            toggleFavouriteMeal: toggleFavouriteMeal,
+          );
         },
       ),
     );

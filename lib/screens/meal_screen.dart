@@ -6,12 +6,14 @@ import 'package:foodrecipeapp/widgets/meal_item_tray.dart';
 class MealScreen extends StatelessWidget {
   const MealScreen({
     super.key,
+    required this.fromWhere,
     required this.meal,
-    required this.addToFavourite,
+    required this.toggleFavouriteMeal,
   });
 
+  final String fromWhere;
   final Meal meal;
-  final Function(Meal meal) addToFavourite;
+  final Function(Meal meal) toggleFavouriteMeal;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,25 @@ class MealScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              addToFavourite(meal);
+              toggleFavouriteMeal(meal);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: Duration(seconds: 3),
+                  content: (fromWhere == "favourite")
+                      ? Text(
+                          "Successfully Removed from the Favourite.",
+                          textAlign: TextAlign.center,
+                        )
+                      : Text(
+                          "Successfully Added to the Favourite.",
+                          textAlign: TextAlign.center,
+                        ),
+                ),
+              );
             },
-            icon: Icon(Icons.favorite),
+            icon: (fromWhere == "favourite")
+                ? Icon(Icons.favorite)
+                : Icon(Icons.favorite_border_outlined),
           ),
         ],
       ),

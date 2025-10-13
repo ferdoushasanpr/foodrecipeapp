@@ -7,18 +7,22 @@ class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({
     super.key,
     required this.meals,
-    required this.addToFavourite,
+    required this.toggleFavouriteMeal,
   });
 
   final List<Meal> meals;
-  final Function(Meal meal) addToFavourite;
+  final Function(Meal meal) toggleFavouriteMeal;
 
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemCount: meals.length,
       itemBuilder: (ctx, index) {
-        return MealItem(meal: meals[index], addToFavourite: addToFavourite);
+        return MealItem(
+          fromWhere: "favourite",
+          meal: meals[index],
+          toggleFavouriteMeal: toggleFavouriteMeal,
+        );
       },
     );
 

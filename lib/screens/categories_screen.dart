@@ -8,11 +8,11 @@ class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({
     super.key,
     required this.availableMeal,
-    required this.addToFavourite,
+    required this.toggleFavouriteMeal,
   });
 
   final List<Meal> availableMeal;
-  final Function(Meal meal) addToFavourite;
+  final Function(Meal meal) toggleFavouriteMeal;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CategoriesScreen extends StatelessWidget {
           CategoryItem(
             category: category,
             availableMeal: availableMeal,
-            addToFavourite: addToFavourite,
+            toggleFavouriteMeal: toggleFavouriteMeal,
           ),
       ],
     );
