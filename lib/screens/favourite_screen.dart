@@ -1,32 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:foodrecipeapp/models/meal.dart';
+import 'package:foodrecipeapp/providers/favourite_meals_provider.dart';
 import 'package:foodrecipeapp/widgets/meal_item.dart';
 
-class FavouriteScreen extends StatelessWidget {
-  const FavouriteScreen({
-    super.key,
-    required this.meals,
-    required this.toggleFavouriteMeal,
-  });
-
-  final List<Meal> meals;
-  final Function(Meal meal) toggleFavouriteMeal;
+class FavouriteScreen extends ConsumerWidget {
+  const FavouriteScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Widget content = ListView.builder(
-      itemCount: meals.length,
+      itemCount: ref.read(favouriteMealsProvider).length,
       itemBuilder: (ctx, index) {
         return MealItem(
           fromWhere: "favourite",
-          meal: meals[index],
-          toggleFavouriteMeal: toggleFavouriteMeal,
+          meal: ref.read(favouriteMealsProvider)[index],
         );
       },
     );
 
-    if (meals.isEmpty) {
+    if (ref.read(favouriteMealsProvider).isEmpty) {
       content = Center(
         child: Text("No meals here!", style: TextStyle(color: Colors.white)),
       );

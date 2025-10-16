@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:foodrecipeapp/models/meal.dart';
+import 'package:foodrecipeapp/providers/favourite_meals_provider.dart';
 import 'package:foodrecipeapp/widgets/meal_item_tray.dart';
 
-class MealScreen extends StatelessWidget {
-  const MealScreen({
-    super.key,
-    required this.fromWhere,
-    required this.meal,
-    required this.toggleFavouriteMeal,
-  });
+class MealScreen extends ConsumerWidget {
+  const MealScreen({super.key, required this.fromWhere, required this.meal});
 
   final String fromWhere;
   final Meal meal;
-  final Function(Meal meal) toggleFavouriteMeal;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text("The Recipes"),
         actions: [
           IconButton(
             onPressed: () {
-              toggleFavouriteMeal(meal);
+              ref
+                  .read(favouriteMealsProvider.notifier)
+                  .toggleFavouriteMeal(meal);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   duration: Duration(seconds: 3),

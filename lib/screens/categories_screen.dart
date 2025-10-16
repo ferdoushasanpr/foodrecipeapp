@@ -5,14 +5,9 @@ import 'package:foodrecipeapp/widgets/category_item.dart';
 import 'package:foodrecipeapp/data/dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({
-    super.key,
-    required this.availableMeal,
-    required this.toggleFavouriteMeal,
-  });
+  const CategoriesScreen({super.key, required this.availableMeal});
 
   final List<Meal> availableMeal;
-  final Function(Meal meal) toggleFavouriteMeal;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +20,7 @@ class CategoriesScreen extends StatelessWidget {
       ),
       children: [
         for (var category in availableCategories)
-          CategoryItem(
-            category: category,
-            availableMeal: availableMeal,
-            toggleFavouriteMeal: toggleFavouriteMeal,
-          ),
+          CategoryItem(category: category, availableMeal: availableMeal),
       ],
     );
   }

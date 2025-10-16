@@ -5,27 +5,17 @@ import 'package:foodrecipeapp/models/meal.dart';
 import 'package:foodrecipeapp/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen({
-    super.key,
-    required this.meals,
-    required this.category,
-    required this.toggleFavouriteMeal,
-  });
+  const MealsScreen({super.key, required this.meals, required this.category});
 
   final Category category;
   final List<Meal> meals;
-  final Function(Meal meal) toggleFavouriteMeal;
 
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemCount: meals.length,
       itemBuilder: (ctx, index) {
-        return MealItem(
-          fromWhere: "meals",
-          meal: meals[index],
-          toggleFavouriteMeal: toggleFavouriteMeal,
-        );
+        return MealItem(fromWhere: "meals", meal: meals[index]);
       },
     );
 

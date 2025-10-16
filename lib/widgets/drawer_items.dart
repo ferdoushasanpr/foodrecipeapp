@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodrecipeapp/screens/filter_screen.dart';
 
 class Draweritems extends StatelessWidget {
-  const Draweritems({
-    super.key,
-    required this.onSelectedMeal,
-    required this.currentFilter,
-  });
-
-  final Map<Filter, bool> currentFilter;
-  final Function(Map<Filter, bool>) onSelectedMeal;
+  const Draweritems({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +44,14 @@ class Draweritems extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () async {
-              final result = await Navigator.of(context).push(
+            onTap: () {
+              Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (ctx) {
-                    return FilterScreen(currentFilters: currentFilter);
+                    return FilterScreen();
                   },
                 ),
               );
-              if (result != null) {
-                onSelectedMeal(result);
-              }
             },
             leading: Icon(Icons.settings, size: 26),
             title: Text(
